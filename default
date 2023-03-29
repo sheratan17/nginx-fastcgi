@@ -105,6 +105,8 @@ server {
                deny all;
         }
 		
+		# Hardening
+		
 		location ~* /(?:uploads|files|wp-content|wp-includes|akismet)/.*.php$ {
 			deny all;
 			access_log off;
@@ -121,6 +123,11 @@ server {
 			deny all; 
 			access_log off;
 			log_not_found off;
+		}
+		
+		limit_req_zone $binary_remote_addr zone=WPRATELIMIT:10m rate=2r/s;
+		location ~ \wp-login.php$ {
+			limit_req zone=WPRATELIMIT;
 		}
 }
 
