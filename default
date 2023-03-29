@@ -94,16 +94,34 @@ server {
          }
 
 
-location ~ /purge(/.*) {
-      fastcgi_cache_purge wpcache "$scheme$request_method$host$1";
-}
+		location ~ /purge(/.*) {
+				fastcgi_cache_purge wpcache "$scheme$request_method$host$1";
+		}
 
         # deny access to .htaccess files, if Apache's document root
         # concurs with nginx's one
         #
-        #location ~ /\.ht {
-        #       deny all;
-        #}
+        location ~ /\.ht {
+               deny all;
+        }
+		
+		location ~* /(?:uploads|files|wp-content|wp-includes|akismet)/.*.php$ {
+			deny all;
+			access_log off;
+			log_not_found off;
+		}
+		
+		location ~ /\.(svn|git)/* {
+			deny all;
+			access_log off;
+			log_not_found off;
+		}
+		
+		location ~ /\.user.ini { 
+			deny all; 
+			access_log off;
+			log_not_found off;
+		}
 }
 
 
