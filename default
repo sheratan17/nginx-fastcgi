@@ -18,6 +18,11 @@
 
 # Default server configuration
 #
+
+fastcgi_cache_path /etc/nginx/cache levels=1:2 keys_zone=wpcache:200m max_size=10g inactive=2h use_temp_path=off;
+fastcgi_cache_key "$scheme$request_method$host$request_uri";
+fastcgi_ignore_headers Cache-Control Expires Set-Cookie;
+
 server {
         listen 80 default_server;
         listen [::]:80 default_server;
