@@ -158,10 +158,12 @@ server {
 			deny all;
 		}
 		
-		location ~ ^/(wp-admin|wp-login\.php) {
-                allow 103.28.12.88;
-                deny all;
-		}
+		location = /wp-login.php {
+			include snippets/fastcgi-php.conf;
+			fastcgi_pass unix:/run/php/php8.1-fpm.sock;
+			allow 103.28.12.88;
+            deny all;
+		}	
 }
 
 
