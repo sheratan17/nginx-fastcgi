@@ -157,6 +157,11 @@ server {
 			allow 103.28.12.88;
 			deny all;
 		}
+		
+		  location ~ ^/(wp-admin|wp-login\.php) {
+                allow 103.28.12.88;
+                deny all;
+		}
 }
 
 
