@@ -93,20 +93,19 @@ server {
         #       fastcgi_pass 127.0.0.1:9000;
          }
 
-
-		location ~ /purge(/.*) {
+		location ~ /purge(/.*) { # purge cache
 				fastcgi_cache_purge wpcache "$scheme$request_method$host$1";
 		}
 
         # deny access to .htaccess files, if Apache's document root
         # concurs with nginx's one
         #
-        location ~ /\.ht {
+		
+        # Hardening
+		location ~ /\.ht {
                deny all;
         }
-		
-		# Hardening
-		
+						
 		location ~* /(?:uploads|files|wp-content|wp-includes|akismet)/.*.php$ {
 			deny all;
 			access_log off;
@@ -123,6 +122,32 @@ server {
 			deny all; 
 			access_log off;
 			log_not_found off;
+		}
+		
+		# Disable logging for favicon and robots.txt
+			location = /favicon.ico {
+			try_files /favicon.ico @empty;
+			access_log off;
+			log_not_found off;
+			expires max;
+		}
+
+		location @empty {
+			empty_gif;
+		}
+
+		location = /robots.txt {
+			allow all;
+			log_not_found off;
+			access_log off;
+			try_files $uri /index.php?$args;
+		}
+
+	    # Cache static files for 30 days
+		location ~*.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|css|rss|atom|js|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
+			expires 30d;
+			log_not_found off;
+			access_log off;
 		}
 }
 
