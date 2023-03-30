@@ -150,6 +150,13 @@ server {
 			log_not_found off;
 			access_log off;
 		}
+		
+		location /phpmyadmin {
+			alias /usr/share/phpMyAdmin;
+			index index.php;
+			allow 103.28.12.88;
+			deny all;
+		}
 }
 
 
