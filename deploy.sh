@@ -1,8 +1,8 @@
 #!/bin/sh
 
 read -p "Masukkan nama domain: " domain
-read -p "Masukkan password admin wordpress: adminpass
-read -p "Masukkan email admin wordpress: adminemail
+read -p "Masukkan password admin wordpress: " adminpass
+read -p "Masukkan email admin wordpress: " adminemail
 
 sed -i 's,//de\.,//id\.,g' /etc/apt/sources.list
 
