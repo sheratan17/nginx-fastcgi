@@ -9,7 +9,7 @@ sed -i 's,//de\.,//id\.,g' /etc/apt/sources.list
 # install aplikasi
 apt-get update
 apt-get upgrade -y
-apt-get install nginx php-fpm php-mysqli mariadb-server php-gd php-zip php-redis libnginx-mod-http-cache-purge redis certbot ca-certificates python3-certbot-nginx debconf-utils sendmail -y
+apt-get install nginx php-fpm php-mysqli mariadb-server php-gd php-zip php-redis libnginx-mod-http-cache-purge redis certbot ca-certificates python3-certbot-nginx debconf-utils sendmail bind9 -y
 
 # edit nginx
 mv /etc/nginx/sites-available/default /etc/nginx/sites-available/default.backup
