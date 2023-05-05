@@ -53,7 +53,7 @@ expect eof
 ")
 
 # Download dan pasang seed
-wget https://raw.githubusercontent.com/sheratan17/phpmyadmin-nginx/main/phpmyadmin.seed -P /root
+wget https://raw.githubusercontent.com/sheratan17/nginx-fastcgi/main/phpmyadmin.seed -P /root
 debconf-set-selections /root/phpmyadmin.seed
 
 # Install phpmyAdmin
