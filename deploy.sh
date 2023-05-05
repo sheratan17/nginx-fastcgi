@@ -81,7 +81,7 @@ wp core config --allow-root --dbhost=localhost --dbname=db_wp --dbuser=$dbuser -
 wp core install --allow-root --url=$domain --title="Wordpress" --admin_name=admin --admin_password=$adminpass --admin_email=$adminemail --path=/var/www/html
 
 # Lindungi wp-admin dengan htpasswd
-PASSWORD=$(openssl rand -base64 6)
+PASSWORD=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 9 | head -n 1)
 HTPASSWD_ENTRY="admin:$(openssl passwd -apr1 $PASSWORD)"
 echo $HTPASSWD_ENTRY >> /var/www/.htpasswd
 echo "htpasswd user: admin | htpasswd password: $PASSWORD" >> /root/htpasswd_login.txt
